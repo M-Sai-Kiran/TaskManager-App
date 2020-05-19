@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-8 col-xl-6 mx-auto">
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmitClick()">
+        <div class="card mt-2">
+            <div class="card-header">
+                <h4>Sign Up</h4>
+            </div>
+            <div class="card-body">
+                
+                    <div class="form-group row">
+                        <label for="txtUserName" class="col-sm-4 col-form-label">Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="txtUserName" formControlName="name" [ngClass]="{'is-valid':signUpForm.get('name').valid &&(signUpForm.get('name').touched || signUpForm.get('name').dirty ), 'is-invalid': signUpForm.get('name').invalid && (signUpForm.get('name').touched || signUpForm.get('name').dirty )  }" name="txtUserName" placeholder="Name" class="form-control">
+                            <span class="text-danger" *ngIf="signUpForm.get('name').invalid && (signUpForm.get('name').touched || signUpForm.get('name').dirty) && signUpForm.get('name').errors?.required">Name cannot be empty.</span>
+                            <span class="text-danger" *ngIf="signUpForm.get('name').invalid && (signUpForm.get('name').touched || signUpForm.get('name').dirty) && signUpForm.get('name').errors?.minlength">length cannot be less than 3.</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtUserEmail" class="col-sm-4 col-form-label">Email</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="txtUserEmail" formControlName="email" name="txtUserEmail" placeholder="Email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtUserPassword" class="col-sm-4 col-form-label">Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" id="txtUserPassword" formControlName="password" name="txtUserPassword" placeholder="Password" class="form-control" />
+                            <span class="text-danger" *ngIf="signUpForm.get('password').invalid && (signUpForm.get('password').touched || signUpForm.get('password').dirty) && signUpForm.get('password').errors?.passwordInvalid">{{signUpForm.get('password').errors?.passwordInvalid}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtConfirmPassword" class="col-sm-4 col-form-label">Confirm Password</label>
+                        <div class="col-sm-8">
+                            <input type="text" id="txtConfirmPassword" formControlName="confirmPassword" name="txtConfirmPassword" placeholder="Confirm Password" class="form-control" >
+                            <span class="text-danger" *ngIf="signUpForm.get('confirmPassword').invalid && (signUpForm.get('confirmPassword').touched || signUpForm.get('confirmPassword').dirty) && signUpForm.get('confirmPassword').errors?.compareValidator" >Cofirm Password should be the same as the Password</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-form-label col-sm-4">Gender</label>
+                        <div class="col-sm-8">
+                            <div class="form-check-label form-check-inline">
+                                <input type="radio" name="gender" value="male" id="male" class="form-check-input" formControlName="gender">
+                                <label for="male" class="form-check-label">male</label>
+                            </div>
+
+                            <div class="form-check-label form-check-inline">
+                                <input type="radio" name="gender" value="female" id="female" class="form-check-input" formControlName="gender">
+                                <label for="female" class="form-check-label">female</label>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <input type="checkbox" class="form-check-input" name="recieveNewsLetters" formControlName="recieveNewsLetters" id="recieveNewsLetters">
+                            <label for="recieveNewsLetters" class="form-check-label">Receive News Letters</label>
+                        </div>
+                    </div>
+                
+                {{signUpForm.value |json}}
+            </div>
+            <div class="card-footer">
+                <button [disabled]="signUpForm.invalid" class="btn btn-success float-right">Create Account</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
